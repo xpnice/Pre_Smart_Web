@@ -1,95 +1,85 @@
 <template>
-  <div id="cpp">
-    <img src="./assets/logo.png" />
-    <h1>{{ msg }}:{{reverse}}</h1>
-    <h1>{{  details()}}</h1>
-    <pre><a v-bind:href="url">我的博客 </a></pre>
-    <input v-model="msg">
-    <button v-on:click.once="onclick">Click Me</button>
-    <button v-on:click="onchange_window">Change Window</button>
-    <h5 v-for="(value,key,index) in window"
-        v-bind:key="key">
-      {{index}}:{{key}}:{{ value }}
-    </h5>
-    <!--<router-view />-->
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer"
+                         app>
+      <v-list dense>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-contact-mail</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Contact</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app
+               color="indigo"
+               dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
+    <v-content>
+      <v-container class="fill-height"
+                   fluid>
+        <v-row align="center"
+               justify="center">
+          <v-col class="text-center">
+            <v-tooltip left>
+              <template v-slot:activator="{ on }">
+                <v-btn :href="source"
+                       icon
+                       large
+                       target="_blank"
+                       v-on="on">
+                  <v-icon large>mdi-code-tags</v-icon>
+                </v-btn>
+              </template>
+              <span>Source</span>
+            </v-tooltip>
+
+            <v-tooltip right>
+              <template v-slot:activator="{ on }">
+                <v-btn icon
+                       large
+                       href="https://codepen.io/johnjleider/pen/zgxeLQ"
+                       target="_blank"
+                       v-on="on">
+                  <v-icon large>mdi-codepen</v-icon>
+                </v-btn>
+              </template>
+              <span>Codepen</span>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+    <v-footer color="indigo"
+              app>
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-var windows = [
-  {
-    name: 'window1',
-    x: 0,
-    y: 0,
-    height: 150
-  },
-  {
-    name: 'window2',
-    x: -10,
-    y: 60,
-    height: 70
-  },
-  {
-    name: 'window3',
-    x: 70,
-    y: 40,
-    height: 250
-  },
-  {
-    name: 'window4',
-    x: 30,
-    y: 10,
-    height: 10
-  }
-]
 export default {
   name: 'App',
-  data () {
-    return {
-      id: 0,
-      msg: 'hello',
-      name: '李骏垚',
-      url: 'www.lyp970805.com',
-      ok: true,
-      window: windows[0]
-    }
+  props: {
+    source: String
   },
-  methods: {
-    details: function () {
-      return (this.ok ? '' : '超帅的') + this.name + '能不能别往外跑了'
-    },
-    onclick: function () {
-      this.name = this.name === '李沿澎' ? '李骏垚' : '李沿澎'
-      this.ok = !this.ok
-    },
-    onchange_window: function () {
-      this.id = (this.id + 1) % 4
-      this.win = this.id
-    }
-  },
-  computed: {
-    reverse: function () {
-      return this.msg.split('').reverse().join('')
-    },
-    win: {
-      get: function () {
-        return this.window.name
-      },
-      set: function (index) {
-        this.window = windows[index]
-      }
-    }
-  }
+  data: () => ({
+    drawer: null
+  })
 }
-</script>
 
-<style>
-#cpp {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+</script>
