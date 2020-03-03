@@ -4,29 +4,41 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 const state = {
-  // 要设置的全局访问的state对象
-  show_tree_view: false,
-  show_node_inf: false
-  // 要设置的初始属性值
+
+  show_tree_view: false, // 是否展示左侧树状图
+  show_node_inf: false // 是否展示右侧节点详情
+
 }
 const getters = {
   // 实时监听state值的变化(最新状态)
   isshow_tree_view () {
-    // 方法名随意,主要是来承载变化的showFooter的值
     return state.show_tree_view
   },
   isshow_node_inf () {
-    // 方法名随意,主要是用来承载变化的changableNum的值
     return state.show_node_inf
   }
 }
 const mutations = {
-
+  change_show_tree_view () {
+    state.show_tree_view = !state.show_tree_view
+  },
+  change_show_node_inf () {
+    state.show_node_inf = !state.show_node_inf
+  }
+}
+const actions = {
+  change_show_tree_view ({ commit }) {
+    commit('change_show_tree_view')
+  },
+  change_show_node_inf ({ commit }) {
+    commit('change_show_node_inf')
+  }
 }
 const store = new Vuex.Store({
   state,
   getters,
-  mutations
+  mutations,
+  actions
 })
 
 export default store
