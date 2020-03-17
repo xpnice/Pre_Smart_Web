@@ -4,13 +4,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 const state = {
-
+  userinfo: null,
   show_tree_view: false, // 是否展示左侧树状图
   show_node_inf: false // 是否展示右侧节点详情
 
 }
 const getters = {
   // 实时监听state值的变化(最新状态)
+  has_login () {
+    return !!state.userinfo
+  },
   isshow_tree_view () {
     return state.show_tree_view
   },

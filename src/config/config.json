@@ -1,4 +1,5 @@
 {
+    "test_mode": true,
     "node_inf": {
         "dense": false,
         "fixedHeader": false,
