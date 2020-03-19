@@ -11,7 +11,7 @@
       <template v-slot:activator="{ on }">
         <v-btn class="ml-8"
                v-on="on"
-               @click.stop="click_button('新建')"
+               @click.stop="goback"
                icon>
           <v-icon>mdi-plus-box</v-icon>
         </v-btn>
@@ -75,6 +75,9 @@
 export default {
   name: 'topbar',
   methods: {
+    goback: function () {
+      this.$router.push('/blockboard')
+    },
     click_button: function (button) {
       alert(button)
     },

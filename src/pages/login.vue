@@ -3,7 +3,7 @@
     <v-sheet class="d-flex box box1"
              color="teal lighten-3">
       <v-container fluid
-                   class="mt-10">
+                   class="inputarea">
         <v-row justify="center"
                align="center">
           <v-col cols="6">
@@ -38,12 +38,16 @@ export default {
   methods: {
     login: function () {
       console.log('login')
-      this.$router.push('/dashboard')
+      this.$router.push('/blockboard')
     }
   }
 }
 </script>
 <style type="text/css">
+.inputarea{
+  margin-top: 50px;
+  top:50;
+}
 .box {
   color: white;
   background-color: #3e8e41;
