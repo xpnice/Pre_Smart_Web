@@ -1,36 +1,40 @@
 <template>
-  <div>
-    <v-sheet class="d-flex box box1"
-             color="teal lighten-3">
-      <v-container fluid
-                   class="inputarea">
-        <v-row justify="center"
-               align="center">
-          <v-col cols="6">
-            <v-text-field label="Email"
-                          hide-details="auto"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col cols="6">
-            <v-text-field label="Password"
-                          hide-details="auto"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col cols="3">
-            <v-btn block
-                   large>注册</v-btn>
-          </v-col>
-          <v-col cols="3">
+  <v-container fill-height>
+
+    <v-layout align-center
+              justify-center>
+      <v-flex xs12
+              sm8
+              md4>
+        <v-card class="elevation-8">
+          <v-toolbar dark
+                     color="blue">
+            <v-toolbar-title>Login Form</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+              <v-text-field prepend-icon="person"
+                            name="login"
+                            label="Login"
+                            id="login"
+                            type="text"></v-text-field>
+              <v-text-field prepend-icon="lock"
+                            name="password"
+                            label="Password"
+                            id="password"
+                            type="password"></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
             <v-btn @click.stop="login"
-                   block
-                   large>登录</v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-sheet>
-  </div>
+                   color="success">Login</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
+
+  </v-container>
 </template>
 <script>
 export default {
@@ -44,23 +48,5 @@ export default {
 }
 </script>
 <style type="text/css">
-.inputarea{
-  margin-top: 50px;
-  top:50;
-}
-.box {
-  color: white;
-  background-color: #3e8e41;
-  width: 40%;
-  height: 55%;
-  overflow: auto;
-}
-.box1 {
-  margin: auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
+
 </style>

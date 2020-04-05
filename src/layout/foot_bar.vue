@@ -1,6 +1,5 @@
 <template>
   <v-footer color="indigo"
-            app
             padless
             absolute
             elevation=15>
@@ -9,7 +8,7 @@
       <span class="white--text px-4">&copy; LYP 2020 &#12288;</span>
       <a href="http://www.beian.miit.gov.cn/"
          class="px-4 text-center "
-         :style="{'color':'#ffffff'}"
+         style="{'color':'#ffffff'}"
          target="_blank">
         吉ICP备20000747号
       </a>

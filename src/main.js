@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import vuetify from '@/plugins/vuetify' // path to vuetify export
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

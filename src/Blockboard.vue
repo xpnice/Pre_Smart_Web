@@ -1,54 +1,257 @@
 <template>
-  <v-container>
-    <v-row class="flex-child">
+  <v-container fluid>
+    <v-app-bar color="indigo darken-2"
+               dark
+               fixed
+               dense>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-col class="d-flex"
-             cols="12"
-             md="4">
+      <v-toolbar-title>
+        <v-tabs background-color="indigo darken-2"
+                center-active
+                dark>
+          <v-tab>工程</v-tab>
+          <v-tab>管理</v-tab>
+          <v-tab>应用</v-tab>
+          <v-tab>视图</v-tab>
+        </v-tabs>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on"
+                 @click.stop="logout"
+                 icon>
+            <v-btn icon>
+              <v-icon>mdi-location-exit</v-icon>
+            </v-btn>
+          </v-btn>
+        </template>
+        <span>登出</span>
+      </v-tooltip>
+    </v-app-bar>
+    <v-row class="flex-child mt-11">
+      <v-col cols="10">
+        <v-data-table v-model="selected"
+                      :headers="headers"
+                      :items="desserts"
+                      single-select
+                      item-key="name"
+                      show-select
+                      dense
+                      class="elevation-1">
+        </v-data-table>
+
         <v-row>
           <v-col cols="6">
-            <v-sheet class="d-flex"
-                     color="green lighten-3"
-                     height="150">
-              <sheet-footer>
-                #2: (1r x 1c)
-              </sheet-footer>
-            </v-sheet>
+            <v-card class="mt-6 mx-auto">
+              <v-sheet class="v-sheet--offset mx-auto"
+                       color="indigo darken-2"
+                       elevation="12"
+                       height="150"
+                       max-width="calc(100% - 32px)">
+                <v-sparkline :labels="labels"
+                             :value="value"
+                             color="white"
+                             line-width="2"
+                             padding="16"></v-sparkline>
+              </v-sheet>
+
+              <v-card-text class="pt-0">
+                <div class="title font-weight-light mb-2">{{selected[0].name}}工程完成进度</div>
+                <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                <v-divider class="my-2"></v-divider>
+                <v-icon class="mr-2"
+                        small>
+                  mdi-clock
+                </v-icon>
+                <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+              </v-card-text>
+            </v-card>
           </v-col>
           <v-col cols="6">
-            <v-sheet class="d-flex"
-                     color="yellow lighten-3"
-                     height="150">
-              <sheet-footer>
-                #3: (1r x 1c)
-              </sheet-footer>
-            </v-sheet>
-          </v-col>
-          <v-col cols="12">
 
-            <v-sheet @click.stop="login"
-                     class="d-flex"
-                     color="red lighten-3"
-                     height="250">
-              <sheet-footer>
-                #5: (2r x 2c)
-              </sheet-footer>
-            </v-sheet>
+            <v-card class="mt-6 mx-auto">
+              <v-sheet class="v-sheet--offset mx-auto"
+                       color="indigo darken-2"
+                       elevation="12"
+                       height="150"
+                       max-width="calc(100% - 32px)">
+                <v-row id="pieReport"
+                       style=" height:100%"></v-row>
+
+              </v-sheet>
+
+              <v-card-text class="pt-0">
+                <div class="title font-weight-light mb-2">User Registrations</div>
+                <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
+                <v-divider class="my-2"></v-divider>
+                <v-icon class="mr-2"
+                        small>
+                  mdi-clock
+                </v-icon>
+                <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-col>
-
+      <v-col cols="2">
+        <div>
+          <v-btn x-large
+                 block
+                 color="success"
+                 dark>勘测</v-btn>
+        </div>
+        <div class="my-2">
+          <v-btn x-large
+                 block
+                 color="success"
+                 @click.stop="login"
+                 dark>流程</v-btn>
+        </div>
+        <div class="my-2">
+          <v-btn x-large
+                 block
+                 color="success"
+                 dark>法规</v-btn>
+        </div>
+        <div class="my-2">
+          <v-btn x-large
+                 block
+                 color="success"
+                 dark>会议</v-btn>
+        </div>
+      </v-col>
     </v-row>
   </v-container>
+
 </template>
 <script>
 export default {
   name: 'Blockboard',
+  data () {
+    return {
+      selected: [],
+      labels: [
+        '2016',
+        '2017',
+        '2018',
+        '2019'
+      ],
+      value: [
+        200,
+        675,
+        410,
+        390
+      ],
+      charts: '',
+      opinion: ['已完成', '进行中', '未完成'],
+      opinionData: [
+        { value: 7, name: '已完成', itemStyle: '#1ab394' },
+        { value: 5, name: '进行中', itemStyle: '#79d2c0' },
+        { value: 4, name: '未完成', itemStyle: '#39a229' }
+      ],
+      headers: [
+        { text: '序号', align: 'start', value: 'index' },
+        {
+          text: '工程名',
+          sortable: false,
+          value: 'name'
+        },
+        { text: '工程类别', value: 'calories' },
+        { text: '创建时间', value: 'createTime' },
+        { text: '修改时间', value: 'lastChange' }
+      ],
+      desserts: [
+        {
+          index: 1,
+          name: '泰日线',
+          calories: 1,
+          createTime: '2019-12-07 20:37:30',
+          lastChange: '2019-12-07 20:37:30'
+        },
+        {
+          index: 2,
+          name: '朱松线',
+          calories: 2,
+          createTime: '2019-12-07 20:37:30',
+          lastChange: '2019-12-07 20:37:30'
+        }
+      ]
+    }
+  },
   methods: {
+    logout: function () {
+      this.$router.push('/')
+    },
     login: function () {
       console.log('login')
       this.$router.push('/dashboard')
+    },
+    drawPie (id) {
+      if (this.charts) {
+        this.charts.resize()
+        return
+      }
+      this.charts = this.$echarts.init(document.getElementById(id))
+      this.charts.setOption({
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a}<br/>{b}:{c} ({d}%)'
+        },
+        grid: {
+          left: '20%'
+        },
+        series: [
+          {
+            name: '状态',
+            type: 'pie',
+            radius: '45%',
+            center: ['50%', '50%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              color: function (params) {
+                var colorList = ['#1ab394', '#79d2c0', '#39a229']
+                return colorList[params.dataIndex]
+              }
+            },
+            data: this.opinionData
+          }
+        ]
+      })
+    }
+  },
+  computed: {
+    getselected: function () {
+      return this.selected.length === 0 ? this.desserts[0] : this.selected[0]
+    }
+
+  },
+  mounted () {
+    this.selected = [this.desserts[0]]
+    this.$nextTick(function () {
+      this.drawPie('pieReport')
+    })
+    window.onresize = () => {
+      return (() => {
+        console.log(1)
+        this.$nextTick(function () {
+          this.drawPie('pieReport')
+        })
+      })()
     }
   }
 }
 </script>
+<style>
+.v-sheet--offset {
+  top: -24px;
+  position: relative;
+}
+</style>

@@ -3,6 +3,7 @@
              color="indigo"
              clipped-left
              clipped-right
+             dense
              dark>
     <v-app-bar-nav-icon @click.stop="change_show_tree_view" />
     <v-toolbar-title>智慧前期网页版</v-toolbar-title>
@@ -11,7 +12,7 @@
       <template v-slot:activator="{ on }">
         <v-btn class="ml-8"
                v-on="on"
-               @click.stop="goback"
+               @click.stop="click_button('新建')"
                icon>
           <v-icon>mdi-plus-box</v-icon>
         </v-btn>
@@ -67,6 +68,30 @@
       <span>清空</span>
     </v-tooltip>
     <v-spacer />
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on"
+               @click.stop="goback"
+               icon>
+          <v-btn icon>
+            <v-icon>mdi-collage</v-icon>
+          </v-btn>
+        </v-btn>
+      </template>
+      <span>主页面</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on"
+               @click.stop="logout"
+               icon>
+          <v-btn icon>
+            <v-icon>mdi-location-exit</v-icon>
+          </v-btn>
+        </v-btn>
+      </template>
+      <span>登出</span>
+    </v-tooltip>
     <v-app-bar-nav-icon @click.stop="change_show_node_inf" />
   </v-app-bar>
 </template>
@@ -77,6 +102,9 @@ export default {
   methods: {
     goback: function () {
       this.$router.push('/blockboard')
+    },
+    logout: function () {
+      this.$router.push('/')
     },
     click_button: function (button) {
       alert(button)
