@@ -4,7 +4,37 @@
                dark
                fixed
                dense>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-menu v-model="menu"
+              :close-on-content-click="true"
+              open-on-hover
+              offset-y>
+        <template v-slot:activator="{ on }">
+          <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
+        </template>
+
+        <v-card>
+          <v-btn class="ma-2"
+                 tile
+                 outlined
+                 color="success">
+            <v-icon left>mdi-pencil</v-icon> 新建
+          </v-btn>
+          <v-divider></v-divider>
+          <v-btn class="ma-2"
+                 tile
+                 outlined
+                 color="success">
+            <v-icon left>mdi-pencil</v-icon> 打开
+          </v-btn>
+          <v-divider></v-divider>
+          <v-btn class="ma-2"
+                 tile
+                 outlined
+                 color="success">
+            <v-icon left>mdi-pencil</v-icon> 保存
+          </v-btn>
+        </v-card>
+      </v-menu>
 
       <v-toolbar-title>
         <v-tabs background-color="indigo darken-2"
@@ -31,7 +61,7 @@
       </v-tooltip>
     </v-app-bar>
     <v-row class="flex-child mt-11">
-      <v-col cols="10">
+      <v-col lg="10" sm="12">
         <v-data-table v-model="selected"
                       :headers="headers"
                       :items="desserts"
@@ -43,7 +73,7 @@
         </v-data-table>
 
         <v-row>
-          <v-col cols="6">
+          <v-col lg="6" sm="12">
             <v-card class="mt-6 mx-auto">
               <v-sheet class="v-sheet--offset mx-auto"
                        color="indigo darken-2"
@@ -54,6 +84,7 @@
                              :value="value"
                              color="white"
                              line-width="2"
+                             auto-draw
                              padding="16"></v-sparkline>
               </v-sheet>
 
@@ -69,7 +100,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols="6">
+          <v-col lg="6" sm="12">
 
             <v-card class="mt-6 mx-auto">
               <v-sheet class="v-sheet--offset mx-auto"
@@ -96,7 +127,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="2">
+      <v-col lg="2" sm="12">
         <div>
           <v-btn x-large
                  block
@@ -130,7 +161,7 @@
 <script>
 export default {
   name: 'Blockboard',
-  data () {
+  data: () => {
     return {
       selected: [],
       labels: [
@@ -231,20 +262,18 @@ export default {
     getselected: function () {
       return this.selected.length === 0 ? this.desserts[0] : this.selected[0]
     }
-
+  },
+  created () {
+    this.selected = [this.desserts[0]]
   },
   mounted () {
-    this.selected = [this.desserts[0]]
     this.$nextTick(function () {
       this.drawPie('pieReport')
     })
     window.onresize = () => {
-      return (() => {
-        console.log(1)
-        this.$nextTick(function () {
-          this.drawPie('pieReport')
-        })
-      })()
+      this.$nextTick(function () {
+        this.drawPie('pieReport')
+      })
     }
   }
 }
