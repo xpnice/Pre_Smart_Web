@@ -4,7 +4,6 @@
   "description": "A Vue.js project",
   "author": "LiYanPeng <xp970805@gmail.com>",
   "private": true,
-  "homepage": "https://xpnice.github.io/Pre_Smart_Web/",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
