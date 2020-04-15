@@ -1,11 +1,10 @@
 <template>
   <v-container fluid>
-    <v-app-bar color="indigo darken-2"
+    <v-app-bar color="#27733D"
                dark
                fixed
                dense>
-      <v-menu v-model="menu"
-              :close-on-content-click="true"
+      <v-menu :close-on-content-click="true"
               open-on-hover
               offset-y>
         <template v-slot:activator="{ on }">
@@ -37,7 +36,7 @@
       </v-menu>
 
       <v-toolbar-title>
-        <v-tabs background-color="indigo darken-2"
+        <v-tabs background-color="#27733D"
                 center-active
                 dark>
           <v-tab>工程</v-tab>
@@ -61,7 +60,8 @@
       </v-tooltip>
     </v-app-bar>
     <v-row class="flex-child mt-11">
-      <v-col lg="10" sm="12">
+      <v-col lg="10"
+             sm="12">
         <v-data-table v-model="selected"
                       :headers="headers"
                       :items="desserts"
@@ -73,10 +73,11 @@
         </v-data-table>
 
         <v-row>
-          <v-col lg="6" sm="12">
+          <v-col lg="6"
+                 sm="12">
             <v-card class="mt-6 mx-auto">
               <v-sheet class="v-sheet--offset mx-auto"
-                       color="indigo darken-2"
+                       color="#4F9E51"
                        elevation="12"
                        height="150"
                        max-width="calc(100% - 32px)">
@@ -100,11 +101,12 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col lg="6" sm="12">
+          <v-col lg="6"
+                 sm="12">
 
             <v-card class="mt-6 mx-auto">
               <v-sheet class="v-sheet--offset mx-auto"
-                       color="indigo darken-2"
+                       color="#4F9E51"
                        elevation="12"
                        height="150"
                        max-width="calc(100% - 32px)">
@@ -127,29 +129,34 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col lg="2" sm="12">
+      <v-col lg="2"
+             sm="12">
         <div>
           <v-btn x-large
                  block
+                 outlined
                  color="success"
                  dark>勘测</v-btn>
         </div>
         <div class="my-2">
           <v-btn x-large
                  block
+                 outlined
                  color="success"
-                 @click.stop="login"
+                 @click.stop="ToProcess"
                  dark>流程</v-btn>
         </div>
         <div class="my-2">
           <v-btn x-large
                  block
+                 outlined
                  color="success"
                  dark>法规</v-btn>
         </div>
         <div class="my-2">
           <v-btn x-large
                  block
+                 outlined
                  color="success"
                  dark>会议</v-btn>
         </div>
@@ -179,9 +186,9 @@ export default {
       charts: '',
       opinion: ['已完成', '进行中', '未完成'],
       opinionData: [
-        { value: 7, name: '已完成', itemStyle: '#1ab394' },
-        { value: 5, name: '进行中', itemStyle: '#79d2c0' },
-        { value: 4, name: '未完成', itemStyle: '#39a229' }
+        { value: 7, name: '已完成', itemStyle: '#FDE5C2' },
+        { value: 5, name: '进行中', itemStyle: '#FFDB9B' },
+        { value: 4, name: '未完成', itemStyle: '#FAFFDF' }
       ],
       headers: [
         { text: '序号', align: 'start', value: 'index' },
@@ -216,8 +223,8 @@ export default {
     logout: function () {
       this.$router.push('/')
     },
-    login: function () {
-      console.log('login')
+    ToProcess: function () {
+      console.log('process')
       this.$router.push('/dashboard')
     },
     drawPie (id) {
@@ -248,7 +255,7 @@ export default {
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
               },
               color: function (params) {
-                var colorList = ['#1ab394', '#79d2c0', '#39a229']
+                var colorList = ['#FDE5C2', '#FFDB9B', '#FAFFDF']
                 return colorList[params.dataIndex]
               }
             },

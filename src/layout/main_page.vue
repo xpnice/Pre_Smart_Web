@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <taskboard />
-    <footbar />
+    <!--footbar /-->
   </v-content>
 </template>
 <script>

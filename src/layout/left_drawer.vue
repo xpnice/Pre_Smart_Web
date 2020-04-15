@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="this.$store.getters.isshow_tree_view"
+  <v-navigation-drawer :value='drawer'
                        clipped
                        app
                        stateless
@@ -10,7 +10,12 @@
 <script>
 import treeview from '@/pages/tree_view'
 export default {
-  name: 'rightdrawer',
+  name: 'leftdrawer',
+  computed: {
+    drawer: function () {
+      return this.$store.getters.isshow_tree_view
+    }
+  },
   components: { treeview }
 }
 </script>
