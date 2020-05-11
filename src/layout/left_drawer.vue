@@ -3,6 +3,7 @@
                        clipped
                        app
                        stateless
+                       width="300px"
                        left>
     <treeview />
   </v-navigation-drawer>
